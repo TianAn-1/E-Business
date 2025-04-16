@@ -1,0 +1,21 @@
+import pandas as pd
+import plotly.express as px
+
+# Sort the DataFrame by market share in descending order
+df = df.sort_values(by="Market Share (%)", ascending=False)
+
+# Create bar chart
+fig = px.bar(
+    df,
+    x="Market Share (%)",
+    y="Brand",
+    orientation="h",
+    title="Vietnam CSD Market Share 2024",
+    text="Market Share (%)",
+    color="Brand"
+)
+
+fig.update_traces(textposition='outside')
+fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+
+fig.show()
