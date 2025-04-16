@@ -1,0 +1,48 @@
+import plotly.express as px
+import pandas as pd
+import plotly.graph_objects as go
+
+# Dữ liệu
+data = {
+    "Year": [2019, 2020, 2021, 2022, 2023, 2024],
+    "Revenue (USD million)": [1400, 1300, 1400, 1500, 1611.8, 1820],
+    "Consumption (million liters)": [750, 700, 750, 800, 824, 870]
+}
+
+df = pd.DataFrame(data)
+
+# Tạo biểu đồ kết hợp
+fig = go.Figure()
+
+# Bar chart cho sản lượng tiêu thụ
+fig.add_trace(go.Bar(
+    x=df["Year"],
+    y=df["Consumption (million liters)"],
+    name="Consumption (million liters)",
+    marker_color='lightskyblue',
+    yaxis="y"
+))
+
+# Line chart cho doanh thu
+fig.add_trace(go.Scatter(
+    x=df["Year"],
+    y=df["Revenue (USD million)"],
+    name="Revenue (USD million)",
+    mode="lines+markers",
+    marker=dict(color='crimson', size=8),
+    line=dict(width=3),
+    yaxis="y2"
+))
+
+# Cấu hình trục tung kép
+fig.update_layout(
+    title="Vietnam CSD Market: Revenue & Consumption (2019–2024)",
+    xaxis=dict(title="Year"),
+    yaxis=dict(title="Consumption (million liters)", side="left"),
+    yaxis2=dict(title="Revenue (USD million)", overlaying="y", side="right"),
+    legend=dict(x=0.01, y=0.99),
+    bargap=0.2,
+    template="plotly_white"
+)
+
+fig.show()
