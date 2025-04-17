@@ -1,0 +1,32 @@
+import plotly.express as px
+import pandas as pd
+import plotly.graph_objects as go
+
+# Create dataframe
+data = {
+    "Phase": ["Reach", "Act", "Convert", "Engage"],
+    "Activity": [
+        "TikTok & Facebook Ads Campaign",
+        "Interactive Minigame",
+        "Livestream Sales Events",
+        "Customer Care via Zalo/Email"
+    ],
+    "Start": ["2025-06-01", "2025-06-15", "2025-07-01", "2025-07-20"],
+    "Finish": ["2025-06-30", "2025-07-15", "2025-07-15", "2025-08-31"]
+}
+
+df = pd.DataFrame(data)
+
+# Create Gantt chart
+fig = px.timeline(
+    df,
+    x_start="Start",
+    x_end="Finish",
+    y="Activity",
+    color="Phase",
+    title="Digital Marketing Action Plan Timeline",
+    labels={"Activity": "Activity", "Phase": "RACE Phase"}
+)
+
+fig.update_yaxes(autorange="reversed")  # Reverse Y-axis for better readability
+fig.show()
