@@ -1,0 +1,31 @@
+import plotly.express as px
+import pandas as pd
+import plotly.graph_objects as go
+
+# dữ liệu từ bảng
+data = {
+    "age group": ["gen z", "gen z", "gen z",
+                  "millennials", "millennials", "millennials",
+                  "gen x", "gen x", "gen x"],
+    "platform": ["tiktok", "instagram", "facebook",
+                 "facebook", "zalo", "tiktok",
+                 "facebook", "youtube", "zalo"],
+    "usage rate (%)": [72, 65, 58, 85, 70, 45, 78, 60, 65]
+}
+
+df = pd.dataframe(data)
+
+# tạo grouped bar chart
+fig = px.bar(
+    df,
+    x="age group",
+    y="usage rate (%)",
+    color="platform",
+    barmode="group",
+    title="preferred social media platforms by age group",
+    text="usage rate (%)"
+)
+
+fig.update_traces(textposition="outside")
+fig.update_layout(template="plotly_white", yaxis_range=[0, 100])
+fig.show()
