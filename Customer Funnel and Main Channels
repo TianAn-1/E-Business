@@ -1,0 +1,31 @@
+import plotly.express as px
+import pandas as pd
+import plotly.graph_objects as go
+
+# Dữ liệu funnel
+data = {
+    "Stage": ["Reach", "Act", "Convert", "Engage"],
+    "Estimated Customers": [1_000_000, 600_000, 200_000, 50_000],
+    "Main Channel": [
+        "TikTok, Facebook Ads",
+        "Minigame, Livestream",
+        "Shopee, Flash Sale",
+        "Zalo, Loyalty Group"
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# Vẽ funnel chart
+fig = px.funnel(
+    df,
+    x="Estimated Customers",
+    y="Stage",
+    text="Main Channel",
+    title="Customer Funnel and Main Channels"
+)
+
+# Tùy chỉnh layout
+fig.update_traces(textposition="inside", textfont_size=14)
+fig.update_layout(template="plotly_white")
+fig.show()
